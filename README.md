@@ -22,7 +22,7 @@ npm install
 
 2. Create/Modify the Hosted Page with configurations (Hosted Domain and Callback Path) in Zuora (`Settings` -> `Payments` -> `Setup Hosted Page`)
 
-* Hosted Domain: set to the hosted domain for example: in this sample, it is listening|http://localhost:3000
+* Hosted Domain: set to the hosted domain for example: in this sample, it is listening at http://localhost:3000
 * Callback Path: set to /payment_page/callback 
 
 3. Modify the file payment-page-samples/conf/config.json to set HPM configurations. Here are the descriptions of the properties in it:
@@ -31,11 +31,11 @@ Authorization: This sample page provides two types of authorization namely Basic
 
 * username : Zuora account username.
 * password : Zuora account password.
-* oauth_token : OAuth Token generated using API: /oauth/token (https://www.zuora.com/developer/api-reference/#operation/createToken)
+* oauth_token : OAuth Token generated using API: [/oauth/token](https://www.zuora.com/developer/api-reference/#operation/createToken)
 * rsa_signature : Zuora's RSA Signature path which is fixed at /v1/rsa-signatures
 * zuora_base_url : Zuora's RSA Signature API end point host url: For the production environment: https://www.zuora.com, For the API Sandbox environment: https://apisandbox.zuora.com
 * payment_page_url : Zuora's Hosted Page URL, For the Production Environment: https://www.zuora.com/apps/PublicHostedPageLite.do , For the API Sandbox Environment: https://apisandbox.zuora.com/apps/PublicHostedPageLite.do
-* pageId: Page Id of the Hosted Page, it can be retrieved in Zuora application through the following path: ((`Settings` -> `Payments` -> `Setup Hosted Page` -> `Page List` -> `Show Page Id`).
+* pageId: Page Id of the Hosted Page, it can be retrieved in Zuora application through the following path: (`Settings` -> `Payments` -> `Setup Hosted Page` -> `Page List` -> `Show Page Id`).
 * accountId (Optional): The ID of the customer account present at Zuora's side. Whenever we perform any transaction using this sample code, we can associate it with account Id using this field.
 * publicKey : Public key, it can be retrieved in Zuora application through the following path: (`Settings` -> `Payments` -> `Setup Hosted Page` -> `Security Keys` -> `Get HPM2.0 Key`).
 
