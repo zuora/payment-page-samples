@@ -17,7 +17,7 @@ Install the package with:
 npm install 
 ```
 
-RUNNING THE SAMPLE:
+## Running this sample
 ------------
 1. Clone this project
 
