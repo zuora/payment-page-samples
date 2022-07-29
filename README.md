@@ -18,28 +18,38 @@ npm install
 ```
 
 ## Running this sample
-1. Clone this project
+---
+### Step 1: Clone this project
+---
+### Step 2:  Configure the payment pages with correct setting
 
-2. Create/Modify the Hosted Page with configurations (Hosted Domain and Callback Path) in Zuora (`Settings` -> `Payments` -> `Setup Hosted Page`)
+Create/Modify the Hosted Page with configurations (Hosted Domain and Callback Path) in Zuora (`Settings` -> `Payments` -> `Setup Hosted Page`) 
 
-* Hosted Domain: set to the hosted domain for example: in this sample, it is listening at http://localhost:3000
-* Callback Path: set to /payment_page/callback 
 
-3. Modify the file payment-page-samples/conf/config.json to set HPM configurations. Here are the descriptions of the properties in it:
+ Field | Description |  example 
+ :---|:---|:---|
+ Hosted Domain| Set the hosted domain of web page | http://localhost:3000
+ Callback Path| Set the callback url | /payment_page/callback 
 
-Authorization: This sample page provides two types of authorization namely Basic Auth and OAuth2 to interact with Zuora. Either of these two can be used to run this sample code with preference given to OAuth Token.
+### Step 3: Modify the file payment-page-samples/conf/config.json 
+to set HPM configurations. Here are the descriptions of the properties in it:
 
-* username : Zuora account username.
-* password : Zuora account password.
-* oauth_token : OAuth Token generated using API: [/oauth/token](https://www.zuora.com/developer/api-reference/#operation/createToken)
-* rsa_signature : Zuora's RSA Signature path which is fixed at /v1/rsa-signatures
-* zuora_base_url : Zuora's RSA Signature API end point host url: For the production environment: https://www.zuora.com, For the API Sandbox environment: https://apisandbox.zuora.com
-* payment_page_url : Zuora's Hosted Page URL, For the Production Environment: https://www.zuora.com/apps/PublicHostedPageLite.do , For the API Sandbox Environment: https://apisandbox.zuora.com/apps/PublicHostedPageLite.do
-* pageId: Page Id of the Hosted Page, it can be retrieved in Zuora application through the following path: (`Settings` -> `Payments` -> `Setup Hosted Page` -> `Page List` -> `Show Page Id`).
-* accountId (Optional): The ID of the customer account present at Zuora's side. Whenever we perform any transaction using this sample code, we can associate it with account Id using this field.
-* publicKey : Public key, it can be retrieved in Zuora application through the following path: (`Settings` -> `Payments` -> `Setup Hosted Page` -> `Security Keys` -> `Get HPM2.0 Key`).
 
-```sh
+ Field | Description 
+ :---|:---|
+Authorization| This sample page provides two types of authorization namely Basic Auth and OAuth2 to interact with Zuora. Either of these two can be used to run this sample code. **Zuora recomments to configure the oauth2_token**|
+username | Zuora username|
+password | Zuora password|
+oauth_token |OAuth Token generated using API: [/oauth/token](https://www.zuora.com/developer/api-reference/#operation/createToken) |
+rsa_signature | Zuora's RSA Signature path which is fixed at **/v1/rsa-signatures** |
+zuora_base_url |Zuora's RSA Signature API end point: For the production environment: https://www.zuora.com, For the API Sandbox environment: https://apisandbox.zuora.com |
+payment_page_url|  Zuora's Hosted Page URL, For the Production Environment: https://www.zuora.com/apps/PublicHostedPageLite.do , For the API Sandbox Environment: https://apisandbox.zuora.com/apps/PublicHostedPageLite.do |
+pageId| Page Id of the Hosted Page, it can be retrieved in Zuora application through the following path: (`Settings` -> `Payments` -> `Setup Hosted Page` -> `Page List` -> `Show Page Id`)|
+| accountId (Optional)|  The ID of the customer account present at Zuora's side. Whenever we perform any transaction using this sample code, we can associate it with account Id using this field. |
+
+**Example:**
+
+```
     "us_sandbox":{
         "username" : "abd",
         "password" : "*****",
@@ -53,13 +63,15 @@ Authorization: This sample page provides two types of authorization namely Basic
     }
 ```
 
-4. Modify the file payment-page-samples/conf/prepopulate.json to set the values for pre-populating fields in HPM page.
+### Step 4:  Configure the prepopulate fields
+---
+Modify the file payment-page-samples/conf/prepopulate.json to set the values for pre-populating fields in HPM page.
 
-5. Execute the shell command:
-
+### Step 5:  Execute the shell command
+---
 ```sh
 npm start
 ```
 	
-6. In browser access the project's URL, for example: http://localhost:3000
+### Step 6: In browser access the project's URL, for example: http://localhost:3000
 
