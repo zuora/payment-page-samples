@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/javascripts/payment_outside_client.js"></script>
+  </head>
+  <script type="text/javascript">
+    var queryString  = '<%= req.originalUrl %>';
+    var refid        = '<%= req.query.refId %>';
+    var responseFrom = '<%= req.query.responseFrom %>';
+    var newToken     = '<%= data.token %>';
+    var newSignature = '<%= data.signature %>';
+    var successFlag  = '<%= req.query.success %>';
+    var errorCode    = '<%= req.query.errorCode %>';
+    var errorMessage = '<%= req.query.errorMessage %>';
+
+    if(window.parent != window){
+      if(responseFrom === "Response_From_Submit_Page" || responseFrom === "Response_From_3D_Validation"){
+        if(successFlag === "true"){
+          // This is used for calling parent dom for further process after payment method creation 
+          window.parent.submitSucceed();
+          alert("succeess");
+        }else{
+          alert('Error code : ' + errorCode+ 'Error message : ' + errorMessage);
+          window.parent.submitFail(queryString, newToken, newSignature);
+          }
+        }
+      }
+    
+    function hide() {
+      if(window.parent != window){
+        document.getElementById("navbar").style.display = "none";
+        document.getElementById("footer").style.display = "none";
+      }
+    }
+  </script>
+  <body onload="hide()">
+    <nav class="navigation container" id="navbar">
+      <div class="nav-brand">Zuora Payment Pages 2.0 Integration Guide</div>
+    <ul class="list-non-bullet nav-pills">
+        <li class = "list-item-inline" ><a href="/" class="link">Home</a></li>
+        <li class = "nav-pills list-item-inline" ><a href="https://knowledgecenter.zuora.com/Billing/Billing_and_Payments/LA_Hosted_Payment_Pages/B_Payment_Pages_2.0/E_Integrate_Payment_Pages_2.0/A_Advanced_Integration_of_Payment_Pages_2.0" class="link">Knowledge Center</a></li>
+    </ul>
+    </nav>
+    <table border="0" class="form-style-1">
+      <tr><td>Payment method Id:</td>
+      <td><%= req.query.refId %></td></tr>
+    </table>
+    <div class="container hero">
+      <img class="hero-img" src = "/img/Zuora.jpeg">
+      <h3 class = "hero-heading">The World <span class="heading-inverted">Subscribed!</span></h3>
+    </div>
+    <footer class="footer" id="footer">
+      <div class="footer-header">Deliver the ultimate subscriber experience</div>
+      <ul>
+          <li class="list-item-inline"><a class="link " href="https://www.zuora.com/products/billing-software/">Billing</a></li>
+          <li class="list-item-inline"><a class="link " href="https://www.zuora.com/products/collect/">Zuora Collect</a></li>
+          <li class="list-item-inline"><a class="link " href="https://www.zuora.com/products/revenue/">Zuora Revenue</a></li>
+          <li class="list-item-inline"><a class="link " href="https://www.zuora.com/products/zuora-central-platform/">Central Platform</a></li>
+      </ul>
+  </footer>
+  </body>
+</html>

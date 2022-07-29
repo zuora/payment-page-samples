@@ -1,0 +1,44 @@
+{  
+    "creditCard": {
+        "creditCardAddress1": "123 Any Street",
+        "creditCardAddress2": "Suite #999",
+        "creditCardCountry": "USA",
+        "creditCardHolderName": "John Doe",
+        "creditCardNumber": "4000000000001091",
+        "cardSecurityCode": "123",
+        "creditCardExpirationYear": "2025",
+        "creditCardExpirationMonth": "01"
+    },
+    "bankTransfer" : {
+        "bankAccountNumber": "",
+        "bankAccountName": "bankAccountName",
+        "bankCode": "",
+        "bankName": "bankName",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "streetNumber": "Number",
+        "streetName": "streetName",
+        "city": "city",
+        "state": "state",
+        "postalCode": "E8 3GX",
+        "country": "Fin",
+        "bankCity": "bankCity",
+        "bankPostalCode": "Code",
+        "bankStreetName": "Name",
+        "bankStreetNumber": "Number",
+        "businessIdentificationCode": "BIN"
+    },
+    "ach" : {
+        "achBankABACode": "",
+        "achBankAccountNumber": "",
+        "achBankAccountType": "Checking",
+        "achBankName": "Tech Credit Union",
+        "achBankAccountName": "John Smith",
+        "achAddress1": "",
+        "achAddress2": "",
+        "achCountry": "ALA",
+        "achCity": "",
+        "achState": "",
+        "achPostalCode": ""
+    }
+}

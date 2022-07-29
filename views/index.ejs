@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zuora Payment Pages 2.0 Integration Guide</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript">
+      let configjsonjs = <%- JSON.stringify(configjson) %>;
+      let defaultEnv = <%- JSON.stringify(defaultEnv) %>;
+      function populate(env){
+        if(env===null)env = defaultEnv;
+        const pageId   = document.getElementById("pageid");
+        const accountId = document.getElementById("accountid");
+        pageId.value = configjsonjs[env].pageId;
+        accountId.value = configjsonjs[env].accountId;
+      }
+
+      function displayChange(integrationtype){
+        const collection = document.getElementsByClassName("hide");
+        if(integrationtype==="onSessionPayment"){
+          for (let i = 0; i < collection.length; i++) {
+          collection[i].style.display = 'table-cell';
+        }
+      }
+        if(integrationtype==="paymentMethodCreation"){
+          for (let i = 0; i < collection.length; i++) {
+          collection[i].style.display = 'none';
+        }
+      }
+    }
+    </script>
+  </head>
+  <body onload="populate(null)">
+    <nav class="navigation container">
+      <div class="nav-brand">Zuora Payment Pages 2.0 Integration Guide</div>
+    <ul class="list-non-bullet nav-pills">
+        <li class = "list-item-inline" ><a href="/" class="link link-active">Home</a></li>
+        <li class = "nav-pills list-item-inline" ><a href="https://knowledgecenter.zuora.com/Billing/Billing_and_Payments/LA_Hosted_Payment_Pages/B_Payment_Pages_2.0/E_Integrate_Payment_Pages_2.0/A_Advanced_Integration_of_Payment_Pages_2.0" class="link">Knowledge Center</a></li>
+    </ul>
+    </nav>
+    <header class="container hero">
+      <h2 class = "hero-heading">Zuora <span class="heading-inverted">Payment Pages 2.0</span> Integration Guide</h2>
+   </header>
+    
+    <form class="form login container-center" action="/payment_page" method="POST">
+    <table border="0" class="form-style-1">
+      <tr>
+        <td>Environment:</td>
+        <td>
+          <select id="env" class="field-select" name='env' onchange="populate(env.value)">
+            <option value="<%= defaultEnv %>" selected><%= defaultEnv %></option>
+            <% for(envs of Object.keys(configjson)) { %>
+              <% if (envs === defaultEnv) continue; %>
+            <option value="<%= envs %>"><%=envs %></option>
+            <% } %> 
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>PageId:</td>
+        <td><input id="pageid" class="field-divided" name='pageid' type="text" maxlength="36"></td>
+      </tr>
+      <tr>
+        <td>Page Type:</td>
+        <td>
+          <select id="pagetype" class="field-select" name='pagetype'>
+          <option value="inside" selected>Button inside</option>
+          <option value="outside">Button outside</option>
+          <option value="overlay">Overlay</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Intergration Type:</td>
+        <td>
+          <select id="integrationtype" class="field-select" name='integrationtype' onchange="displayChange(integrationtype.value)">
+            <option value="paymentMethodCreation">Payment Method Creation</option>
+            <option value="onSessionPayment">On Session Payment</option>
+          </select>
+        </td>
+      </tr>
+      <tr id="storepaymentmethod">
+        <td class="hide">Store Payment Method:</td>
+        <td class="hide">
+          <input type="checkbox" id="storepm" name='storepm' checked>
+        </td>
+      </tr>
+      <tr>
+        <td class="hide">Payment Amount:</td>
+        <td class="hide">
+          <input type="text" id="pmamount" name='pmamount' value="10">
+        </td>
+      </tr>
+      <tr>
+        <td class="hide">Billing AccountId:</td>
+        <td class="hide">
+          <input type="text" id="accountid" name='accountid'>
+        </td>
+      </tr>
+    </table>
+    <div class="container container-center">
+      <input type="submit" class = "link link-secondary"></button>
+    </div>
+    </form>
+    <footer class="footer">
+      <div class="footer-header">Deliver the ultimate subscriber experience</div>
+      <ul>
+          <li class="list-item-inline"><a class="link " href="https://www.zuora.com/products/billing-software/">Billing</a></li>
+          <li class="list-item-inline"><a class="link " href="https://www.zuora.com/products/collect/">Zuora Collect</a></li>
+          <li class="list-item-inline"><a class="link " href="https://www.zuora.com/products/revenue/">Zuora Revenue</a></li>
+          <li class="list-item-inline"><a class="link " href="https://www.zuora.com/products/zuora-central-platform/">Central Platform</a></li>
+      </ul>
+  </footer>
+  </body>
+</html>
