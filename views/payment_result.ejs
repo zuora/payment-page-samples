@@ -32,6 +32,14 @@
         document.getElementById("navbar").style.display = "none";
         document.getElementById("footer").style.display = "none";
       }
+      if(successFlag=== "false"){
+        document.getElementById("responsefrom").style.display = "none";
+        document.getElementById("pmid").style.display = "none";
+      }
+      if(successFlag=== "true"){
+        document.getElementById("errorcode").style.display = "none";
+        document.getElementById("errormessage").style.display = "none";
+      }
     }
   </script>
   <body onload="hide()">
@@ -43,8 +51,26 @@
     </ul>
     </nav>
     <table border="0" class="form-style-1">
-      <tr><td>Payment method Id:</td>
-      <td><%= req.query.refId %></td></tr>
+      <tr>
+        <td><h2>Success:</h2></td>
+        <td><h2><%= req.query.success %></h2></td>
+      </tr>
+      <tr id="responsefrom">
+        <td><h2>Response From:</h2></td>
+        <td><h2><%= req.query.responseFrom %></h2></td>
+      </tr>
+      <tr id="pmid">
+        <td><h2>Payment method Id:</h2></td>
+        <td><h2><%= req.query.refId %></h2></td>
+      </tr>
+      <tr id="errorcode">
+        <td><h2>Error code:</h2></td>
+        <td><h2><%= req.query.errorCode %></h2></td>
+      </tr>
+      <tr id="errormessage">
+        <td><h2>Error Message:</h2></td>
+        <td><h2><%= req.query.errorMessage %></h2></td>
+      </tr>
     </table>
     <div class="container hero">
       <img class="hero-img" src = "/img/Zuora.jpeg">

@@ -5,7 +5,7 @@
         "creditCardCountry": "USA",
         "creditCardHolderName": "John Doe",
         "creditCardNumber": "4000000000001091",
-        "cardSecurityCode": "123",
+
         "creditCardExpirationYear": "2025",
         "creditCardExpirationMonth": "01"
     },

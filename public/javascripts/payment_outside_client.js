@@ -124,21 +124,21 @@ function loadPaymentPages(data, prepopulateFields, req) {
 	// params["field_passthrough3"] = data.pageId;
 	// params.put("currency", "GBP");
 
-	// if(req.integrationtype === "onSessionPayment"){
-	// 	if(req.storepm === "on"){
-    //         params["storePaymentMethod"] = "true";
-    //       }else{
-    //         params["storePaymentMethod"] = "false";
-    //       }
-	// 	params["doPayment"] = "true";
-    //     params["field_accountId"] = req.accountid;
-	// 	params["authorizationAmount"] = req.pmamount;
-	//     params["currency"] = "USD";
-	// 	params["field_passthrough2"]="doPaymentTrue";
-	// 	params["field_passthrough3"]=req.accountid;
-	// 	params["field_passthrough4"]=req.pmamount;
-	// 	params["field_passthrough5"]="USD";
-	// }
+	if(req.integrationtype === "onSessionPayment"){
+		if(req.storepm === "on"){
+            params["storePaymentMethod"] = "true";
+          }else{
+            params["storePaymentMethod"] = "false";
+          }
+		params["doPayment"] = "true";
+        params["field_accountId"] = req.accountid;
+		params["authorizationAmount"] = req.pmamount;
+	    params["currency"] = "USD";
+		params["field_passthrough2"]="doPaymentTrue";
+		params["field_passthrough3"]=req.accountid;
+		params["field_passthrough4"]=req.pmamount;
+		// params["field_passthrough5"]="USD";
+	}
 	
 	// For regeneration of signature
 	params["field_passthrough1"]=data.pageId;

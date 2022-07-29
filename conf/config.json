@@ -1,5 +1,5 @@
 {
-    "default_env": "local",
+    "default_env": "us_sandbox",
     "us_sandbox":{
         "username" : "",
         "password" : "",
@@ -7,9 +7,9 @@
         "rsa_signature": "/v1/rsa-signatures",
         "zuora_base_url": "https://rest.apisandbox.zuora.com",
         "payment_page_url": "https://apisandbox.zuora.com/apps/PublicHostedPageLite.do",
-        "pageId": "8ad0877b82126d1c018214b14ff515e8",
+        "pageId": "",
         "accountId":"",
-        "publicKey": "MIIBIjANBgmozHVlnq6F6d0069dGCEedyljKX+Whw9UVTPLwVQSQM4fbCVgAR8YHx8W7oCj24tciv5tmnklmlFfr67FhMGOee16mshKbqebsW/sI49P8obYIqGMf+h0AmHOH0oEaXeuZj+O9JFXfmeq910OfvttA4Bb/ig6vco6pQ87qgWKcU1shYNNBZ2UWdydfmOaXqv4WulnLZtF3S0h2bUTMmJdNAl3rj1R/xyGUK7kGUVWBcv8DbasfU7qTcLhY05oMasDTLGFLgbM3vwgKKUEMDqq2Tc1wfNJmzoYiBctF5KnRjhwQNfIfIAPBkY6DtIjaSN44FrCAwHzwIDAQAB"
+        "publicKey": ""
     },
     "eu_sandbox":{
         "username" : "",
@@ -27,8 +27,8 @@
         "password" : "",
         "oauth_token" : "",
         "rsa_signature": "/v1/rsa-signatures",
-        "zuora_base_url": "",
-        "payment_page_url": "",
+        "zuora_base_url": "https://sandbox.na.zuora.com",
+        "payment_page_url": "https://sandbox.na.zuora.com/apps/HostedPageLite.do",
         "pageId": "",
         "accountId":"",
         "publicKey": ""

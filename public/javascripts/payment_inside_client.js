@@ -80,6 +80,7 @@ function loadPaymentPages(data, prepopulateFields, req) {
     params["id"] = data.pageId;
     params["param_supportedTypes"]="AmericanExpress,JCB,Visa,MasterCard,Discover";
     params["url"] = data.url;
+
 	// Please note that we need to send parameters according to our requiement.
 	// For 3DS test
 	// params["authorizationAmount"] = 12;

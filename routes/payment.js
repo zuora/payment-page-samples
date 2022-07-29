@@ -112,13 +112,23 @@ router.post('/', function(req, res, next) {
 // This is used for parsing callback from button outside
 router.get('/callback', function(req, res, next) {
   if(req.query.success !== "true") {
-    
-    const reqBody = {
-      pageid:req.query.field_passthrough1,
-      authorizationtype:req.query.field_passthrough6,
-      env:req.query.field_passthrough7
-      // We can go on to add additional values for signature creation 
-      // We would also require to add values for on session params
+    let reqBody = {}
+    if(req.query.field_passthrough2 === "doPaymentTrue"){
+      reqBody = {
+        pageid:req.query.field_passthrough1,
+        accountid:req.query.field_passthrough3,
+        pmamount:req.query.field_passthrough4,
+        authorizationtype:req.query.field_passthrough6,
+        env:req.query.field_passthrough7,
+        integrationtype:"onSessionPayment"
+      }
+    }else {
+      reqBody = {
+        pageid:req.query.field_passthrough1,
+        authorizationtype:req.query.field_passthrough6,
+        env:req.query.field_passthrough7
+        // We can go on to add additional values for signature creation
+      }
     }
     getToken(reqBody).then(function(data){
       res.render('payment_result', {req, data});
