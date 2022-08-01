@@ -46,7 +46,7 @@ zuora_base_url |Zuora's RSA Signature API end point: For the production environm
 payment_page_url|  Zuora's Hosted Page URL, For the Production Environment: https://www.zuora.com/apps/PublicHostedPageLite.do , For the API Sandbox Environment: https://apisandbox.zuora.com/apps/PublicHostedPageLite.do |
 pageId| Page Id of the Hosted Page, it can be retrieved in Zuora application through the following path: (`Settings` -> `Payments` -> `Setup Hosted Page` -> `Page List` -> `Show Page Id`)|
 | accountId (Optional)|  The ID of the customer account present at Zuora's side. Whenever we perform any transaction using this sample code, we can associate it with account Id using this field. |
-
+| publicKey | Public key, it can be retrieved in Zuora application through the following path: (`Settings` -> `Payments` -> `Setup Hosted Page` -> `Security Keys` -> `Get HPM2.0 Key`). |
 **Example:**
 
 ```
