@@ -3,7 +3,7 @@ function forwardCallbackURL(response) {
 	for(id in response) {
 		callbackUrl = callbackUrl+id+"="+encodeURIComponent(response[id])+"&";		
 	}
-    alert(callbackUrl);
+    console.log(callbackUrl);
 	window.location.replace(callbackUrl);
 } 
 
@@ -18,7 +18,7 @@ var callback = function (response) {
         }
     } else if (response.responseFrom == "Response_From_3D_Validation") {
 		// Requesting hosted page fails. Error handling code should be added here. Simply forward to the callback url in sample code.
-		alert("In Sample Code: \n ThreeDSResult:" + response.ThreeDSResult
+		console.log("In Sample Code: \n ThreeDSResult:" + response.ThreeDSResult
 				+ "\n AuthorizeResult: " + response.AuthorizeResult + "\n threedPaymentMethodId: "
 				+ response.threedPaymentMethodId + "\n AuthTransactionId: "
 				+ response.AuthTransactionId + "\n ECI: " + response.ECI

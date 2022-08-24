@@ -19,9 +19,9 @@
         if(successFlag === "true"){
           // This is used for calling parent dom for further process after payment method creation 
           window.parent.submitSucceed();
-          alert("succeess");
+          console.log("succeess");
         }else{
-          alert('Error code : ' + errorCode+ 'Error message : ' + errorMessage);
+          console.log('Error code : ' + errorCode+ 'Error message : ' + errorMessage);
           window.parent.submitFail(queryString, newToken, newSignature);
           }
         }
