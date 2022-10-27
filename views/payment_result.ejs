@@ -13,6 +13,7 @@
     var successFlag  = '<%= req.query.success %>';
     var errorCode    = '<%= req.query.errorCode %>';
     var errorMessage = '<%= req.query.errorMessage %>';
+    var paymentId    = '<%= req.query.PaymentId %>';
 
     if(window.parent != window){
       if(responseFrom === "Response_From_Submit_Page" || responseFrom === "Response_From_3D_Validation"){
@@ -35,10 +36,14 @@
       if(successFlag=== "false"){
         document.getElementById("responsefrom").style.display = "none";
         document.getElementById("pmid").style.display = "none";
+        document.getElementById("paymentid").style.display = "none";
       }
       if(successFlag=== "true"){
         document.getElementById("errorcode").style.display = "none";
         document.getElementById("errormessage").style.display = "none";
+        if (paymentId != ''){
+          document.getElementById("paymentid").style.display = "block";
+        }
       }
     }
   </script>
@@ -62,6 +67,10 @@
       <tr id="pmid">
         <td><h2>Payment method Id:</h2></td>
         <td><h2><%= req.query.refId %></h2></td>
+      </tr>
+      <tr id="paymentid">
+        <td><h2>Payment Id:</h2></td>
+        <td><h2><%= req.query.PaymentId %></h2></td>
       </tr>
       <tr id="errorcode">
         <td><h2>Error code:</h2></td>
