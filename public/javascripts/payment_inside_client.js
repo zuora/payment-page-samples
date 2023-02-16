@@ -125,9 +125,18 @@ function loadPaymentPages(data, prepopulateFields, req) {
     params['field_accountId'] = req.accountid;
 
     params['currency'] = req.currency;
-    params['paymentDescription'] = `Shrey's subscription aka Salary :)`; // Currently supported by GoCardless SEPA
-    if(req.invoiceIds){
-      params['documents'] = JSON.stringify(req.invoiceIds.split(",").map((invoice)=>({"type": "invoice", "ref": invoice.trim()})));
+    params[
+      'paymentDescription'
+    ] = `Shrey's subscription aka Salary :)`; // Currently supported by GoCardless SEPA
+    if (req.invoiceIds) {
+      params['documents'] = JSON.stringify(
+        req.invoiceIds
+          .split(',')
+          .map((invoice) => ({
+            type: 'invoice',
+            ref: invoice.trim(),
+          }))
+      );
     } else {
       params['authorizationAmount'] = req.pmamount;
     }
