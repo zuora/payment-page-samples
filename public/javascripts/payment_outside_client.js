@@ -116,7 +116,7 @@ function loadPaymentPages(data, prepopulateFields, req) {
 	// Please note that we need to send parameters according to our requiement.
 	// For 3DS test
 	// params["authorizationAmount"] = 12;
-	// params["field_accountId"] = "402880e981f2e24f0181f30c388f0052";
+	params["field_accountId"] = req.accountid;
 	// params["field_passthrough1"] = "Test_Value_Passthrough1";
 	// params["paymentGateway"]="BlueSnap";
 	// params["currency"] = "GBP";
@@ -132,18 +132,28 @@ function loadPaymentPages(data, prepopulateFields, req) {
           }
 		params["doPayment"] = "true";
         params["field_accountId"] = req.accountid;
-		params["authorizationAmount"] = req.pmamount;
-	    params["currency"] = "USD";
+	    params["currency"] = req.currency;
 		params["field_passthrough2"]="doPaymentTrue";
 		params["field_passthrough3"]=req.accountid;
 		params["field_passthrough4"]=req.pmamount;
 		// params["field_passthrough5"]="USD";
-	}
+		params['paymentDescription'] = `Shrey's subscription aka Salary :)`; // Currently supported by GoCardless SEPA
+		if(req.invoiceIds){
+		  params['documents'] = JSON.stringify(req.invoiceIds.split(",").map((invoice)=>({"type": "invoice", "ref": invoice.trim()})));
+		} else {
+		  params['authorizationAmount'] = req.pmamount;
+		}
+	  } else {
+		// This overides the auth amount used for validating the PM.
+		params['authorizationAmount'] = req.pmamount;
+	  }
 	
 	// For regeneration of signature
 	params["field_passthrough1"]=data.pageId;
 	params["field_passthrough6"]=req.authorizationtype;
 	params["field_passthrough7"]=req.env;
+	params["field_passthrough8"]=req.invoiceIds;
+	params["field_passthrough9"]=req.currency;
 	
 	params["style"]="inline";
 	params["submitEnabled"]="false";

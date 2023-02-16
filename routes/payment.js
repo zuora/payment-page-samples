@@ -15,6 +15,7 @@ return new Promise((resolve,reject)=>{
   let authorizationHeader;
   const pageId            = reqBody.pageid;
   const accountId         = reqBody.accountid;
+  const currency          = reqBody.currency;
   // Fields for on session payments
   const integrationType   = reqBody.integrationtype;
   const pmamount          = reqBody.pmamount;
@@ -27,6 +28,9 @@ return new Promise((resolve,reject)=>{
         if (typeof authorizationType === 'undefined'){
           authorizationType = "basic";
         }
+        // if (integrationType === "onSessionPayment" && invoiceIds){
+        //   invoices = invoiceIds.split(",");
+        // }
         let zuora_base_url           = configjson[defaultEnv].zuora_base_url;
         let zuora_rsa_signature      = configjson[defaultEnv].rsa_signature;
         let zuora_payment_page_url   = configjson[defaultEnv].payment_page_url;
@@ -40,25 +44,24 @@ return new Promise((resolve,reject)=>{
           } else{
             authorizationHeader = "Bearer "+ oAuthToken;
           }
-        
         if (integrationType === "onSessionPayment"){ 
           request = {
+            ...(!reqBody.invoiceIds && {authorizationAmount : pmamount}),
             pageId: pageId,
             uri: zuora_payment_page_url,
             // On session specifc parameters to be passed to support server side validation https://knowledgecenter.zuora.com/Billing/Billing_and_Payments/LA_Hosted_Payment_Pages/B_Payment_Pages_2.0/J_Implement_Payment_Pages_2.0_to_support_one-time_payment_flows
             accountId : accountId,
-            authorizationAmount : pmamount,
-            currency : "USD",
+            currency : currency,
             method: "POST"
           }
         } else{
           request = {
             pageId: pageId,
             uri: zuora_payment_page_url,
-            // Please note that these optional parameters are to be passed as and when needed. We also need to make sure that the same are passed in loadPaymentPages() when "Validate Client-Side HPM Parameters" has been enabled.
-            // currency: "USD",
-            // accountId: "402880e981f2e24f0181f30c388f0052",
-            // authorizationAmount: "12",
+            accountId : accountId,
+            // Please note that optional parameters are to be passed as and when needed. We also need to make sure that the same are passed in loadPaymentPages() when "Validate Client-Side HPM Parameters" has been enabled.
+            // locale: "fr",
+            authorizationAmount : pmamount,
             method: "POST"
           };  
         }
@@ -92,7 +95,7 @@ router.post('/', function(req, res, next) {
   let configjson = JSON.parse(config);
   var env =  req.body.env;
   var prepopulateFields = preparePrePopulatefields(prepopulatejson, configjson[env]);
-  getToken(req.body).then(function(data){
+  getToken(req.body).then(function(data) {
     console.log(JSON.stringify(data,' '));
     if (req.body.pagetype == 'inside' || req.body.pagetype == 'overlay' ){
       res.render('payment_page_inside', { resultcode:"success", resultdata: data, prePopulateData: prepopulateFields, req: req.body});
@@ -120,7 +123,9 @@ router.get('/callback', function(req, res, next) {
         pmamount:req.query.field_passthrough4,
         authorizationtype:req.query.field_passthrough6,
         env:req.query.field_passthrough7,
-        integrationtype:"onSessionPayment"
+        invoiceIds: req.query.field_passthrough8,
+        currency: req.query.field_passthrough9,
+        integrationtype: "onSessionPayment"
       }
     }else {
       reqBody = {

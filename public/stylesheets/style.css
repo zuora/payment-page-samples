@@ -18,7 +18,10 @@ a {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  margin: 0px
+  height:100vh; 
+  margin:0;
+  display:flex; 
+  flex-direction:column; 
 }
 
 hr {
@@ -136,11 +139,13 @@ hr {
 /** footers **/
 
 .footer {
+  width: 100%;
   background-color: var(--primary-color);
   padding: 4rem 1rem;
   text-align: center;
   color: white;
   border-top-right-radius: 1rem;
+  margin-top:auto; 
 }
 
 .footer .link {
