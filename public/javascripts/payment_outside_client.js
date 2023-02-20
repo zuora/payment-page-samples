@@ -1,3 +1,5 @@
+let SUPPORTED_TYPES="AmericanExpress,JCB,Visa,MasterCard,Discover";
+
 var parameterArray = {};
 var params = {};
 
@@ -42,7 +44,7 @@ function submitPage() {
 
 	document.getElementById('errorMessage').innerHTML='';
 	if (document.getElementById('agreement').checked) {
-		if (!Z.setAgreement("External","Recurring","Visa","http://www.google.com"))
+		if (!Z.setAgreement("External","Recurring",SUPPORTED_TYPES,""))
 			return;
 	}
 	Z.submit();
@@ -50,7 +52,8 @@ function submitPage() {
 }
 
 function submitSucceed() {
-	document.getElementById("submitButton").disabled = true;
+	document.getElementById("submitButton").style.display = "none";
+	document.getElementById("checkBoxDiv").style.display='none';
 }
 
 
@@ -105,13 +108,18 @@ function submitFail(callbackQueryString, newToken, newSignature) {
 	Z.runAfterRender(serverErrorMessageCallback);
 }
 
+function hideAgree() {
+	if(req.pagetype.split('-').at(-1)==='legacy') document.getElementById("checkBoxDiv").style.display='none';
+}
+
 function loadPaymentPages(data, prepopulateFields, req) {
-    params["token"] = data.token
+	hideAgree();
+    params["token"] = data.token;
     params["signature"] = data.signature;
     params["key"] = data.key;
     params["tenantId"] = data.tenantId;
     params["id"] = data.pageId;
-    params["param_supportedTypes"]="AmericanExpress,JCB,Visa,MasterCard,Discover";
+    params["param_supportedTypes"]=SUPPORTED_TYPES;
     params["url"] = data.url;
 	// Please note that we need to send parameters according to our requiement.
 	// For 3DS test

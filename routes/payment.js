@@ -62,7 +62,6 @@ return new Promise((resolve,reject)=>{
             method: "POST"
           };  
         }
-
         axios.post(zuora_signature_full_url, request,
           {
             headers: {
@@ -94,14 +93,14 @@ router.post('/', function(req, res, next) {
   var prepopulateFields = preparePrePopulatefields(prepopulatejson, configjson[env]);
   getToken(req.body).then(function(data){
     console.log(JSON.stringify(data,' '));
-    if (req.body.pagetype == 'inside' || req.body.pagetype == 'overlay' ){
+    if (req.body.pagetype.split('-')[0] === 'inside' || req.body.pagetype === 'overlay' ){
       res.render('payment_page_inside', { resultcode:"success", resultdata: data, prePopulateData: prepopulateFields, req: req.body});
     }else{
       res.render('payment_page_outside', { resultcode:"success", resultdata: data, prePopulateData: prepopulateFields, req: req.body});
     }
 
   }).catch(function(error){
-    if (req.body.pageType === 'inside' || req.body.pageType === 'overlay' ){
+    if (req.body.pageType.split('-')[0] === 'inside' || req.body.pageType === 'overlay' ){
       res.render('error',  { message:"failed",  error});
     }else{
       res.render('error',  { message:"failed",  error});

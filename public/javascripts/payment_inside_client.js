@@ -1,3 +1,5 @@
+let SUPPORTED_TYPES="AmericanExpress,JCB,Visa,MasterCard,Discover";
+
 function forwardCallbackURL(response) {
 	var callbackUrl = "/payment_result?";
 	for(id in response) {
@@ -72,13 +74,14 @@ var errorMessageCallback = function(key, code, message) {
 };
 
 function loadPaymentPages(data, prepopulateFields, req) {
+	hideAgree();
     var params = {};
     params["token"] = data.token
     params["signature"] = data.signature;
     params["key"] = data.key;
     params["tenantId"] = data.tenantId;
     params["id"] = data.pageId;
-    params["param_supportedTypes"]="AmericanExpress,JCB,Visa,MasterCard,Discover";
+    params["param_supportedTypes"]=SUPPORTED_TYPES;
     params["url"] = data.url;
 
 	// Please note that we need to send parameters according to our requiement.
@@ -102,28 +105,30 @@ function loadPaymentPages(data, prepopulateFields, req) {
         params["field_accountId"] = req.accountid;
 		params["authorizationAmount"] = req.pmamount;
 	    params["currency"] = "USD";
-}
+	}
 
-	if(req.pagetype==='inside') {
-		params["style"]="inline";
-	}else {
+	if(req.pagetype ==='overlay') {
 		params["style"]="overlay";
+	}else {
+		params["style"]="inline";
 	}
 
 	params["submitEnabled"]="true";
-	Z.renderWithErrorHandler(params,prepopulateFields,callback,errorMessageCallback);	
-
+	Z.renderWithErrorHandler(params,prepopulateFields,callback,errorMessageCallback);
 }
 
 function agree() {
 	if(document.getElementById("agreement").checked) {
-		if (!Z.setAgreement("External","Recurring","Visa","http://www.google.com"))
-			return;
-	} else {
-		if(!Z.setAgreement("","","",""))
-			return;
+		Z.setAgreement("External","Recurring",SUPPORTED_TYPES,"")
 	}
+	else Z.setAgreement("","","","")
 }
+
+function hideAgree() {
+	if(req.pagetype.split('-').at(-1)==='legacy' || req.pagetype==='overlay')
+		document.getElementById("checkBoxDiv").style.display='none';
+}
+
 /**
  * javascript method for button outside of iframe
  * @returns 
