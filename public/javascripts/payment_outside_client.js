@@ -50,8 +50,8 @@ function submitPage() {
       !Z.setAgreement(
         'External',
         'Recurring',
-        'Visa',
-        'http://www.google.com'
+        'AmericanExpress,JCB,Visa,MasterCard,Discover',
+        ''
       )
     )
       return;
@@ -124,7 +124,29 @@ function submitFail(callbackQueryString, newToken, newSignature) {
   Z.runAfterRender(serverErrorMessageCallback);
 }
 
+function agree() {
+  if(document.getElementById('agreement').checked) {
+    document.getElementById('submitButton').className="link link-primary";
+    document.getElementById('submitButton').disabled=false;
+  }
+  else {
+    document.getElementById('submitButton').className="link link-secondary";
+    document.getElementById('submitButton').disabled=true;
+  }
+}
+
+function hideAgreement(){
+  document.getElementById('checkBoxDiv').hidden=true;
+  document.getElementById('submitButton').className="link link-primary";
+  document.getElementById('submitButton').disabled=false;
+}
+
 function loadPaymentPages(data, prepopulateFields, req) {
+
+  if(req.pagetype.split('-').at(-1)==='legacy') {
+    hideAgreement();
+  }
+
   params['token'] = data.token;
   params['signature'] = data.signature;
   params['key'] = data.key;
