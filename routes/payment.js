@@ -108,8 +108,8 @@ router.post('/', function (req, res, next) {
     .then(function (data) {
       console.log(JSON.stringify(data, ' '));
       if (
-        req.body.pagetype.split('-').at(0) === 'inside' ||
-        req.body.pagetype === 'overlay'
+          req.body.pagetype === 'inside' ||
+          req.body.pagetype === 'overlay'
       ) {
         res.render('payment_page_inside', {
           resultcode: 'success',

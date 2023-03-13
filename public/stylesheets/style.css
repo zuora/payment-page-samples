@@ -219,7 +219,7 @@ select{
 .form-style-1 input[type="text"],
 .form-style-1 input[type=password] 
 {
-  width: 220px;
+  width: 200px;
 }
 
 .form-style-1 .field-long{

@@ -92,9 +92,6 @@ var errorMessageCallback = function (key, code, message) {
 };
 
 function loadPaymentPages(data, prepopulateFields, req) {
-  if(req.pagetype.split('-').at(-1)==='legacy' || req.pagetype==='overlay') {
-    hideAgreement();
-  }
 
   var params = {};
   params['token'] = data.token;
@@ -156,6 +153,12 @@ function loadPaymentPages(data, prepopulateFields, req) {
   }
 
   params['submitEnabled'] = 'true';
+
+  Z.setEventHandler("onloadCallback", function() {
+    if(req.pagetype==='inside') agree();
+  });
+
+
   Z.renderWithErrorHandler(
     params,
     prepopulateFields,
@@ -164,10 +167,6 @@ function loadPaymentPages(data, prepopulateFields, req) {
   );
 }
 
-function hideAgreement() {
-  document.getElementById('checkBoxDiv').hidden=true;
-  document.getElementById('submitDisable').hidden=true;
-}
 
 function agree() {
   if (document.getElementById('agreement').checked) {
@@ -180,10 +179,8 @@ function agree() {
       )
     )
       return;
-    document.getElementById('submitDisable').hidden=true;
   } else {
     if (!Z.setAgreement('', '', '', '')) return;
-    document.getElementById('submitDisable').hidden=false;
   }
 }
 /**

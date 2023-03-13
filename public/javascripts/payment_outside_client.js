@@ -124,23 +124,6 @@ function submitFail(callbackQueryString, newToken, newSignature) {
   Z.runAfterRender(serverErrorMessageCallback);
 }
 
-function agree() {
-  if(document.getElementById('agreement').checked) {
-    document.getElementById('submitButton').className="link link-primary";
-    document.getElementById('submitButton').disabled=false;
-  }
-  else {
-    document.getElementById('submitButton').className="link link-secondary";
-    document.getElementById('submitButton').disabled=true;
-  }
-}
-
-function hideAgreement(){
-  document.getElementById('checkBoxDiv').hidden=true;
-  document.getElementById('submitButton').className="link link-primary";
-  document.getElementById('submitButton').disabled=false;
-}
-
 function loadPaymentPages(data, prepopulateFields, req) {
 
   if(req.pagetype.split('-').at(-1)==='legacy') {
