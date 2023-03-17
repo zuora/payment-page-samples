@@ -102,15 +102,14 @@ function loadPaymentPages(data, prepopulateFields, req) {
     'AmericanExpress,JCB,Visa,MasterCard,Discover';
   params['url'] = data.url;
   // params['locale'] = 'fr';
-//hardcoding done
   // Please note that we need to send parameters according to our requiement.
   // For 3DS test
   // params["authorizationAmount"] = 12;
   // params["field_accountId"] = "8adcf5348409a8190184146e5cb12bd3";
   params['field_accountId'] = req.accountid;
-  console.log({req});
   // params["field_passthrough1"] = "Test_Value_Passthrough1";
-  params["paymentGateway"] = "Stripe";
+  params['paymentGateway'] = req.paymentGateway;
+  //params["paymentGateway"] = "Stripe";
   // params["currency"] = "USD";
   // Page Id is required to Regenerate signature and token, and regenerate signature is required when reCAPTCHA function is enabled and when submit failed in button out model.
   // params["field_passthrough3"] = data.pageId;

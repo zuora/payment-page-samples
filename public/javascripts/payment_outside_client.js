@@ -138,7 +138,8 @@ function loadPaymentPages(data, prepopulateFields, req) {
   // params["authorizationAmount"] = 12;
   params['field_accountId'] = req.accountid;
   // params["field_passthrough1"] = "Test_Value_Passthrough1";
-  // params["paymentGateway"]="BlueSnap";
+  params['paymentGateway'] = req.paymentGateway;
+ // params["paymentGateway"]="Stripe";
   // params["currency"] = "GBP";
   // Page Id is required to Regenerate signature and token, and regenerate signature is required when reCAPTCHA function is enabled and when submit failed in button out model.
   // params["field_passthrough3"] = data.pageId;
