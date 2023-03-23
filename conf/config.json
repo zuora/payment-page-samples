@@ -1,5 +1,5 @@
 {
-    "default_env": "us_sandbox",
+    "default_env": "",
     "us_sandbox":{
         "username" : "",
         "password" : "",
@@ -22,6 +22,7 @@
         "accountId":"",
         "publicKey": ""
     },
+
     "na_sandbox":{
         "username" : "",
         "password" : "",
