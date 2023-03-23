@@ -126,10 +126,6 @@ function submitFail(callbackQueryString, newToken, newSignature) {
 
 function loadPaymentPages(data, prepopulateFields, req) {
 
-  if(req.pagetype.split('-').at(-1)==='legacy') {
-    hideAgreement();
-  }
-
   params['token'] = data.token;
   params['signature'] = data.signature;
   params['key'] = data.key;
