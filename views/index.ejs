@@ -27,6 +27,36 @@
         }
       }
     }
+    function checkGwOptions(gwOptions) {
+        const outputMessage   = document.querySelector(".output");
+        if(isNotValidGwOptionString(gwOptions)) {
+          outputMessage.innerHTML = `Please check the Gateway Option input : ${gwOptions}, it should be of the format option:value;option2:value2.`;
+        }
+        else {
+          outputMessage.innerHTML =``;
+        }
+      }
+    function isNotValidGwOptionString(gwOptionsStr) {
+      let flag=0;
+        if (gwOptionsStr){
+          let gwOptions = gwOptionsStr.split(";");
+          gwOptions.forEach((gwOption)=>{
+            if (gwOption.split(":").length!==2){
+                flag=1;
+            }
+          }
+          )
+          if(flag==1){
+            return true;
+          }
+          else{
+            return false;
+          }
+      }
+      else{
+        return true;
+      }
+    }
     </script>
   </head>
   <body onload="populate(null)">
@@ -84,6 +114,13 @@
           </select>
         </td>
       </tr>
+      <tr>
+        <td >Payment Gateway Options:</td>
+             <td >
+                <input onchange = "checkGwOptions(gatewayOptions.value)" type="text" id="gatewayOptions" name='gatewayOptions' value="Option:Value">
+             </td>
+    </tr>
+    <p class="output"></p>
       <tr id="storepaymentmethod">
         <td class="hide">Store Payment Method:</td>
         <td class="hide">
