@@ -38,9 +38,9 @@
       }
     function isNotValidGwOptionString(gwOptionsStr) {
         if (gwOptionsStr){
-          let gwOptions = gwOptionsStr.split(";");
-          let keys=gwOptions.length;   
-          for(each=0;each<keys;each++){              
+         const gwOptions = gwOptionsStr.split(";");
+         const keys=gwOptions.length;   
+          for(let each=0;each<keys;each++){              
             let gwOption=gwOptions[each];
             let verify=gwOption.split(":");
             if(verify.length!==2){              
@@ -68,6 +68,7 @@
     
     <form class="form login container-center" action="/payment_page" method="POST">
     <table border="0" class="form-style-1">
+      <p class="output"></p>
       <tr>
         <td>Environment:</td>
         <td>
@@ -115,7 +116,6 @@
                 <input  onchange = "checkGwOptions(gatewayOptions.value)" type="text" id="gatewayOptions" name='gatewayOptions' value="Option:Value">
              </td>
     </tr>
-    <p class="output"></p>
       <tr id="storepaymentmethod">
         <td class="hide">Store Payment Method:</td>
         <td class="hide">
