@@ -127,7 +127,7 @@ hr {
   padding-top: 1rem;
   color: var(--dark-gray);
 }
-.gwoption {
+.gwoError {
   padding-inline-start: 21vh;
   color: var(--primary-color);
 }

@@ -28,27 +28,23 @@
       }
     }
     function checkGwOptions(gwOptions) {
-        const outputMessage   = document.querySelector(".output");
-        if(isNotValidGwOptionString(gwOptions)) {
-          outputMessage.innerHTML = `Please check the Gateway Options input : "{${gwOptions}}", it should be of the format `+ `<span class="gwoption">option:value;option2:value2</span>`
-        }
-        else {
-          outputMessage.innerHTML =``;
-        }
+      const outputMessage = document.querySelector(".output");
+      if(isNotValidGwOptionString(gwOptions)) {
+          outputMessage.innerHTML = `Please check the Gateway Options input : "{${gwOptions}}", it should be of the format `+ `<span class="gwoError">option:value;option2:value2</span>`
+      }
+      else {
+          outputMessage.innerHTML = ``;
+      }
       }
     function isNotValidGwOptionString(gwOptionsStr) {
-        if (gwOptionsStr){
+        if (gwOptionsStr) {
          const gwOptions = gwOptionsStr.split(";");
-         const keys=gwOptions.length;   
-          for(let each=0;each<keys;each++){              
-            let gwOption=gwOptions[each];
-            let verify=gwOption.split(":");
-            if(verify.length!==2){              
+          for(let index = 0; index < gwOptions.length; index++){              
+            if(gwOptions[index].split(":").length !== 2 ) {
               return true;
             }
           }
-      }
-      else{
+      }else {
         return false;
       }
     }
@@ -67,8 +63,8 @@
    </header>
     
     <form class="form login container-center" action="/payment_page" method="POST">
+    <p class="output"></p>
     <table border="0" class="form-style-1">
-      <p class="output"></p>
       <tr>
         <td>Environment:</td>
         <td>
