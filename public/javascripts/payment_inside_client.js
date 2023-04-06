@@ -101,6 +101,12 @@ function loadPaymentPages(data, prepopulateFields, req) {
   params['param_supportedTypes'] =
     'AmericanExpress,JCB,Visa,MasterCard,Discover';
   params['url'] = data.url;
+  let gtOptions = req.gatewayOptions.split(";");
+  gtOptions.forEach((gtOption) => {
+    let ref = gtOption.split(":");
+    let pass = "param_gwOptions_" + ref[0];
+    params[pass] = ref[1];
+});
   // params['locale'] = 'fr';
   // Please note that we need to send parameters according to our requiement.
   // For 3DS test

@@ -127,7 +127,10 @@ hr {
   padding-top: 1rem;
   color: var(--dark-gray);
 }
-
+.gwoError {
+  padding-inline-start: 21vh;
+  color: var(--primary-color);
+}
 .hero .hero-heading .heading-inverted {
   color: var(--primary-color);
 }
