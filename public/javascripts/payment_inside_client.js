@@ -92,6 +92,7 @@ var errorMessageCallback = function (key, code, message) {
 };
 
 function loadPaymentPages(data, prepopulateFields, req) {
+
   var params = {};
   params['token'] = data.token;
   params['signature'] = data.signature;
@@ -151,13 +152,19 @@ function loadPaymentPages(data, prepopulateFields, req) {
     params['authorizationAmount'] = req.pmamount;
   }
 
-  if (req.pagetype === 'inside') {
-    params['style'] = 'inline';
-  } else {
+  if (req.pagetype === 'overlay') {
     params['style'] = 'overlay';
+  } else {
+    params['style'] = 'inline';
   }
 
   params['submitEnabled'] = 'true';
+
+  Z.setEventHandler("onloadCallback", function() {
+    if(req.pagetype==='inside') agree();
+  });
+
+
   Z.renderWithErrorHandler(
     params,
     prepopulateFields,
@@ -166,14 +173,15 @@ function loadPaymentPages(data, prepopulateFields, req) {
   );
 }
 
+
 function agree() {
   if (document.getElementById('agreement').checked) {
     if (
       !Z.setAgreement(
         'External',
         'Recurring',
-        'Visa',
-        'http://www.google.com'
+          'AmericanExpress,JCB,Visa,MasterCard,Discover',
+        ''
       )
     )
       return;

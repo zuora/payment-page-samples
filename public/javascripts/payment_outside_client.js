@@ -50,8 +50,8 @@ function submitPage() {
       !Z.setAgreement(
         'External',
         'Recurring',
-        'Visa',
-        'http://www.google.com'
+        'AmericanExpress,JCB,Visa,MasterCard,Discover',
+        ''
       )
     )
       return;
@@ -125,6 +125,7 @@ function submitFail(callbackQueryString, newToken, newSignature) {
 }
 
 function loadPaymentPages(data, prepopulateFields, req) {
+
   params['token'] = data.token;
   params['signature'] = data.signature;
   params['key'] = data.key;
