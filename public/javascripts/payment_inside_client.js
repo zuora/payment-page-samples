@@ -1,3 +1,10 @@
+var citmit = false;
+function onloadCallback() {
+  if (citmit === true) {
+    Z.setAgreement("External","Recurring","Visa, Mastercard, Discover,AmericanExpress,JCB,Diners","Payment method will be deleted once payment has been taken")
+  }
+}
+
 function forwardCallbackURL(response) {
   var callbackUrl = '/payment_result?';
   for (id in response) {
@@ -120,7 +127,9 @@ function loadPaymentPages(data, prepopulateFields, req) {
   // Page Id is required to Regenerate signature and token, and regenerate signature is required when reCAPTCHA function is enabled and when submit failed in button out model.
   // params["field_passthrough3"] = data.pageId;
   // params.put("currency", "GBP");
-
+  if (req.citmit === 'on') {
+    citmit = true;
+  }
   if (req.integrationtype === 'onSessionPayment') {
     if (req.storepm === 'on') {
       params['storePaymentMethod'] = 'true';
@@ -158,6 +167,7 @@ function loadPaymentPages(data, prepopulateFields, req) {
   }
 
   params['submitEnabled'] = 'true';
+  Z.setEventHandler("onloadCallback", onloadCallback);
   Z.renderWithErrorHandler(
     params,
     prepopulateFields,
