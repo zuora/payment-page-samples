@@ -106,7 +106,7 @@ function loadPaymentPages(data, prepopulateFields, req) {
   params['tenantId'] = data.tenantId;
   params['id'] = data.pageId;
   params['param_supportedTypes'] =
-    'AmericanExpress,JCB,Visa,MasterCard,Discover,Dankort';
+    'AmericanExpress,JCB,Visa,MasterCard,Discover,Dankort,RuPay';
   params['url'] = data.url;
   params['locale'] = req.locale;
   let gtOptions = req.gatewayOptions.split(";");
