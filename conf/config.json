@@ -1,7 +1,7 @@
 {
     "default_env": "",
     "us_sandbox":{
-        "username" : "",
+        "username" : "gwang@zuora.com",
         "password" : "",
         "oauth_token" : "",
         "rsa_signature": "/v1/rsa-signatures",
